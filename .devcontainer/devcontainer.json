@@ -14,7 +14,11 @@
         "4577": {
             "label": "Application",
             "onAutoForward": "openPreview"
+        },
+        "4576": {
+            "label": "Api",
+            "onAutoForward": "openPreview"
         }
     },
-    "forwardPorts": [4577]
+    "forwardPorts": [4577, 4576]
 }
