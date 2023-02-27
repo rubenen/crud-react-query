@@ -9,8 +9,7 @@ export const queryClient = new QueryClient({
     },
 });
 
-const BASE_URL =
-    "https://rubenen-automatic-meme-pw9q5jgx5jx35px-3000.preview.app.github.dev";
+const BASE_URL = "/api";
 
 export const api = wretch(BASE_URL).resolve((resolver) => {
     return resolver.notFound((res) => {
