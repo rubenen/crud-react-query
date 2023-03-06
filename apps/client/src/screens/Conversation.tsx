@@ -39,18 +39,15 @@ export const Conversation = ({ params }: ConversationProps) => {
         },
     });
 
-    const { mutate: sendMessage } = useMutation({
-        mutationFn: ({
-            text,
-            conversationId,
-        }: {
-            text: string;
-            conversationId: string;
-        }) =>
-            api
-                .post({ text }, `/conversations/${conversationId}/messages`)
-                .json(),
-    });
+    const sendMessage = ({
+        text,
+        conversationId,
+    }: {
+        text: string;
+        conversationId: string;
+    }) => {
+        api.post({ text }, `/conversations/${conversationId}/messages`).json();
+    };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -66,18 +63,7 @@ export const Conversation = ({ params }: ConversationProps) => {
 
         if (text.trim().length > 0 && !target.ariaBusy) {
             target.ariaBusy = "true";
-            sendMessage(
-                { text, conversationId },
-                {
-                    onSuccess: () => {
-                        queryClient.invalidateQueries();
-                    },
-                    onSettled: () => {
-                        target.removeAttribute("aria-busy");
-                        target.reset();
-                    },
-                }
-            );
+            sendMessage({ text, conversationId });
         }
     };
 
